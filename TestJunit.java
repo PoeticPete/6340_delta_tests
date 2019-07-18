@@ -110,7 +110,7 @@ public class TestJunit {
 
 	/**
 	 * Generates a single good line (only alphanumberic characters)
-	 * @param lineLength
+	 * @param lineLength max length of the line
 	 * @return The good line
 	 */
 	private String generateGoodLine(int lineLength) {
@@ -119,7 +119,9 @@ public class TestJunit {
 
 		final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-		for(int i = 0; i < lineLength; i++) {
+		int randomLineLength = r.nextInt(lineLength) + 1;	// random num 1 through line length inclusive
+
+		for(int i = 0; i < randomLineLength; i++) {
 			sb.append(AB.charAt(r.nextInt(AB.length())));
 		}
 		return sb.toString();
@@ -143,12 +145,15 @@ public class TestJunit {
 		badChar.add(randomBadChar);
 		writeToFile(expectedCharPath, badChar);
 
-		int randomSpot = r.nextInt(lineLength);
-
-		String first = line.substring(0, randomSpot);
-		String second = line.substring(randomSpot);
-		return first + randomBadChar + second;
-
+		int randomSpot = r.nextInt(line.length() + 1);
+		if(randomSpot == line.length()) {
+			// put bad char at the end
+			return line + randomBadChar;
+		} else {
+			String first = line.substring(0, randomSpot);
+			String second = line.substring(randomSpot);
+			return first + randomBadChar + second;
+		}
 	}
 
 	/**
