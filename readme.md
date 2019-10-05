@@ -1,3 +1,7 @@
+# Delta tests
+Run 100+ tests for CS6340 :D
+
+
 # Quickstart
 1. Clone the repo into your "delta" directory
 2. cd 6340_delta_tests
